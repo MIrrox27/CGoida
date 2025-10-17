@@ -1,4 +1,4 @@
-#
+# author https://github.com/MIrrox27/CGoida
 # CGoidaTokens.py
 
 from enum import Enum
