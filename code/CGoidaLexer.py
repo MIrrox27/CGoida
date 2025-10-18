@@ -1,7 +1,7 @@
 # author https://github.com/MIrrox27/CGoida
 # CGoidaLexer.py
 
-from CGoidaTokens import CGoidaTokenType
+from CGoidaTokens import CGoidaTokenType, CGoidaToken
 
 
 class CGoidaLexer:
@@ -41,6 +41,13 @@ class CGoidaLexer:
         if self.current_char == '\n':
             self.advance()
 
+    def read_number(self):
+        result = ''
+        while self.current_char is not None and self.current_char.isdigit():
+            result += self.current_char
+            self.advance()
+        return CGoidaTokenType.NUMBER, int(result)
+
     def get_next_token(self):
         while self.current_char is not None:  # пока символ который мы проверяем не равен None
             if self.current_char.isspace():  # если символ который мы проверяем равен пробелу
@@ -50,16 +57,17 @@ class CGoidaLexer:
                 self.skip_comment()  # то мы вызываем функцию для пропуска коммментов
                 continue  # continue начинает цикл заново с нового символа. Это гарантирует, что после пропуска пробелов/комментариев мы обработаем следующий значимый символ
 
+            if self.current_char.isdigit():
+                token_type, velue = self.read_number()
+                return CGoidaToken(token_type, velue, self.line)
+
+            return CGoidaToken(CGoidaTokenType.EOF, line=self.line)
+
 
 if __name__ == "__main__":
-    # Создаем лексер для простого кода
-    lexer = CGoidaLexer("""
-            def peekPosition(self, lookhead: int = 1):
-        peek_position = self.position + lookhead # sdfsdsd
-        if peek_position >= len(self.text):
-            return None
-        return self.text[peek_position]
-    """)
-    while lexer.peekPosition() != None:
-        print(lexer.current_char)
-        lexer.advance()
+    lexer = CGoidaLexer("10 20 30")
+    tokens = []
+    for _ in range(4):  # 3 числа + EOF
+        token = lexer.get_next_token()
+        tokens.append(token)
+        print(token)
