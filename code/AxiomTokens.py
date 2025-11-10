@@ -1,11 +1,11 @@
-# author https://github.com/MIrrox27/CGoida
-# CGoidaTokens.py
+# author https://github.com/MIrrox27/Axiom
+# AxiomTokens.py
 
 from enum import Enum
 
 
 # Перечисление всех типов токенов в нашем языке программирования
-class CGoidaTokenType(Enum):
+class AxiomTokenType(Enum):
     # ЛИТЕРАЛЫ (константные значения)
     NUMBER = 'NUMBER'  # Целое число: 42, 100, -5
     STRING = 'STRING'  # Строка в кавычках: "привет", "мир"
@@ -23,6 +23,7 @@ class CGoidaTokenType(Enum):
     WHILE = 'WHILE'  # Цикл while: while
     FOR = "FOR"  # Цикл for: for
     VIVOD = 'VIVOD'  # Вывод на печать: vivod
+    AXIOM = "AXIOME" # Еще не придумал
 
     # ОПЕРАТОРЫ (математические и логические операции)
     PLUS = 'PLUS'  # Сложение: +
@@ -50,8 +51,8 @@ class CGoidaTokenType(Enum):
 
 
 # Класс для представления отдельного токена
-class CGoidaToken:
-    def __init__(self, type: CGoidaTokenType, value: any = None, line: int = 1):
+class AxiomToken:
+    def __init__(self, type: AxiomTokenType, value: any = None, line: int = 1):
         self.type = type  # Тип токена из перечисления TokenType
         self.value = value  # Значение токена (для чисел, строк, идентификаторов)
         self.line = line  # Номер строки, где найден токен (для отладки ошибок)

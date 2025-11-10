@@ -1,10 +1,10 @@
-# author https://github.com/MIrrox27/CGoida
-# CGoidaLexer.py
+# author https://github.com/MIrrox27/Axiom
+# AxiomLexer.py
 
-from CGoidaTokens import CGoidaTokenType, CGoidaToken
+from AxiomTokens import AxiomTokenType, AxiomToken
 
 
-class CGoidaLexer:
+class AxiomLexer:
     def __init__(self, text: str):
         self.text = text  # сам код который мы передаем в наш интерпритатор
         self.position = 0  # позиция "курсора" в тексте порядковый номер символа
@@ -46,7 +46,7 @@ class CGoidaLexer:
         while self.current_char is not None and self.current_char.isdigit():
             result += self.current_char
             self.advance()
-        return CGoidaTokenType.NUMBER, int(result)
+        return AxiomTokenType.NUMBER, int(result)
 
     def get_next_token(self):
         while self.current_char is not None:  # пока символ который мы проверяем не равен None
@@ -59,13 +59,13 @@ class CGoidaLexer:
 
             if self.current_char.isdigit():
                 token_type, velue = self.read_number()
-                return CGoidaToken(token_type, velue, self.line)
+                return AxiomToken(token_type, velue, self.line)
 
-            return CGoidaToken(CGoidaTokenType.EOF, line=self.line)
+            return AxiomToken(AxiomToken.EOF, line=self.line)
 
 
 if __name__ == "__main__":
-    lexer = CGoidaLexer("10 20 30")
+    lexer = AxiomLexer("10 20 30")
     tokens = []
     for _ in range(4):  # 3 числа + EOF
         token = lexer.get_next_token()

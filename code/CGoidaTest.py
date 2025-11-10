@@ -1,2 +1,2 @@
-# author https://github.com/MIrrox27/CGoida
-# CGoidaTest.py
+# author https://github.com/MIrrox27/Axiom
+# AxiomTest.py
